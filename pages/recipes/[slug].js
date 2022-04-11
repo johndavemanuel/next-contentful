@@ -9,8 +9,8 @@ const client = createClient({
 })
 
 export const getStaticPaths = async () => {
-  const res = await client.getEntries({ 
-    content_type: "recipe" 
+  const res = await client.getEntries({
+    content_type: "recipe"
   })
 
   const paths = res.items.map(item => {
@@ -29,7 +29,7 @@ export const getStaticProps = async ({ params }) => {
   const { items } = await client.getEntries({
     content_type: 'recipe',
     'fields.slug': params.slug
-  }) 
+  })
 
   if (!items.length) {
     return {
@@ -54,7 +54,7 @@ export default function RecipeDetails({ recipe }) {
   return (
     <div>
       <div className="banner">
-        <Image 
+        <Image
           src={'https:' + featuredImage.fields.file.url}
           width={featuredImage.fields.file.details.image.width}
           height={featuredImage.fields.file.details.image.height}
@@ -70,7 +70,7 @@ export default function RecipeDetails({ recipe }) {
           <span key={ing}>{ ing }</span>
         ))}
       </div>
-        
+
       <div className="method">
         <h3>Method:</h3>
         <div>{documentToReactComponents(method)}</div>
